@@ -18,6 +18,12 @@ Built-in formatting options:
 * 3 — json encoded pretty print (only data)
 * Commits to add more formating options are always welcome.
 
+Command alias included! You can use the short \_d() instead of devLog() function. Save time typing and work faster. Or rename the function in to what ever you prefer.
+
+Example. Both commands give the same result:
+* devLog('failed query', $sql);
+* \_d('failed query', $sql);
+
 USAGE TIP: Run the monitoring script in a separate terminal window, set it to always on top, move it to your second monitor and just leave it there. Now use devLog() in your PHP code and you have a live terminal running for your debugging messges :)
 
 Free to use in any of your projects. Just drop me a note here if it has helped you.
