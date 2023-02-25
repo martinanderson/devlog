@@ -4,9 +4,9 @@
 PHP devLog() is advanced and easy to use JavaScript's console.log() command substitute for PHP Developers, that offers an efficency boost for your development and debugging tasks.
 
 * Very simple and fast to integrate into your PHP project.
-* Includes monitoring script (Bash), to moitor your devLog() messages in a terminal window 
-* Real time monitoring of your debug messages and data. 
-* Keeps your messages also in a logfile for later analysis. 
+* Includes monitoring script (Bash), to monitor your devLog() messages.
+* Real time monitoring of your messages and debug data. 
+* Everything is also saved in a logfile for later analysis. 
 * Debug message is generated with a simple devLog('message');
 * or with a more detailed devLog('message', $dump);
 * or with formatting options devLog('message', $dump, 1);
