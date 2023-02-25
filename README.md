@@ -16,8 +16,7 @@ Built in formatting options:
 * 1 - human-readable information about a variable / array / json
 * 2 - structured information about expressions that includes its type and value
 * 3 - json encoded pretty print (only data)
-
-Commits to add more formating options are always welcome.
+* Commits to add more formating options are always welcome.
 
 USAGE TIP: Run the monitoring script in a separate terminal window, set it to always on top, move it to your second monitor and just leave it there. Now use devLog() in your PHP code and you have a live terminal running for your debugging messges :)
 
