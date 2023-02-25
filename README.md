@@ -13,12 +13,13 @@ PHP devLog() is advanced and easy to use JavaScript's console.log() command subs
 
 Built in formatting options:
 * 0 - default
-* 1 - array/json pretty print
-* 2 - json encoded pretty print
+* 1 - human-readable information about a variable / array / json
+* 2 - structured information about expressions that includes its type and value
+* 3 - json encoded pretty print (only data)
 
-USAGE TIP: Run the monitoring script in a separate terminal window, set it to always on top, move it to your second monitor and just leave it there. Now use devLog() in your PHP code and your messges are running in live terminal.
+USAGE TIP: Run the monitoring script in a separate terminal window, set it to always on top, move it to your second monitor and just leave it there. Now use devLog() in your PHP code and you have a live terminal running for your debugging messges :)
 
-Totally free to use and use in any projects. 
+Free to use in any of your projects. Just drop me a note here if it has helped you.
 Released under MIT licence as Open Source.
 
 Ps. I drink a lot of coffee and accept btc :)
