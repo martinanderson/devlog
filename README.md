@@ -1,4 +1,4 @@
-# DevLog()  — debugging tool
+# DevLog()  — a debugging tool
 ## Advanced JS console.log substitute for PHP developers
 
 PHP devLog() is advanced and easy to use JavaScript's console.log substitute for PHP Developers that helps you work more effectivly and give a boost for your debugging work.
