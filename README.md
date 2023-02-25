@@ -10,6 +10,7 @@ PHP devLog() is advanced and easy to use JavaScript's console.log substitute for
 * Debug message is generated with a simple devLog('message');
 * or with a more detailed devLog('message', $dump);
 
-Totally free to use and use in any projects. Released under MIT licence.
+Totally free to use and use in any projects. 
+Released under MIT licence as Open Source.
 
 Ps. I drink a lot of coffee and accept btc :)
