@@ -1,5 +1,5 @@
-# Dev Log 
-## — Advanced console.log() substitute for PHP developers
+# DevLog()  — A PHP debugger
+## Advanced console.log() substitute for PHP developers
 
 devLog() is advanced and easy to use JS console.log() substitute for PHP Developers. 
 
