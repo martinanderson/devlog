@@ -1,7 +1,5 @@
 # INSTALL STEPS
 
-[TOC]
-
 **Using devLog is pretty straightforward:** Simply follow the steps in this Guide and after that also take a look at the **[User Guide & Examples](USER_GUIDE.md)** file and you will be boosting up your debugging tasks in no time.
 
 Let's get started:
