@@ -109,11 +109,11 @@ function devLog($message = 'beep', $dump = '', $filter = 0) {
 				break;
 				
 				default:
-					# No filter defined
+					# No filter defined, just a default dump
 					$message .= $dump."\n";
 				break;
 			}
-			$message .= "</devLog>\n";
+			$message .= "[/devLog]\n";
 			
 		}
 
@@ -126,4 +126,3 @@ function devLog($message = 'beep', $dump = '', $filter = 0) {
 		die('devLog() has no write permissions to the logfile: '.$logfile_FullPath);
 	}
 }
-
