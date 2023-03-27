@@ -50,7 +50,7 @@ function devLog($message = 'beep', $dump = '', $filter = 0) {
 	$logfile_PathRecordFile = 'dev.log.path';
 	$logfile_FullPath = NULL;
 
-	if (null !== DIR_ROOT) {
+	if (null === DIR_ROOT) {
 		define('DIR_ROOT', __DIR__);
 	}
 
@@ -70,13 +70,15 @@ function devLog($message = 'beep', $dump = '', $filter = 0) {
 	
 	# Let's try to find the path record file, first hit will count
 	foreach ($devlog_Paths as $value) {
-		$logfile_FullPath = trim(file_get_contents(trim($value)));
-		if (file_exists(($logfile_FullPath))) {
-			break;
+		if (file_exists(($value))) {
+			$logfile_FullPath = trim(file_get_contents(trim($value))).'dev.log';
+			if (file_exists(($logfile_FullPath))) {
+				break;
+			}
 		}
 	}
 
-	if (touch($logfile_FullPath)) {
+	if (is_writable($logfile_FullPath)) {
 		# Logfile has write access, let's begin logging
 			
 		$message = "\n[devLog: ".$message." @ ".date("Y-m-d H:i:s")."]\n";
@@ -117,11 +119,11 @@ function devLog($message = 'beep', $dump = '', $filter = 0) {
 
 		# Commit to log
 		if (!file_put_contents($logfile_FullPath, $message, FILE_APPEND | LOCK_EX)) {
-			die('Can\'t write to the devLog() logfile:'.$logfile_FullPath);
+			die('Can\'t write to the devLog() logfile: '.$logfile_FullPath);
 		}
 	
 	} else {
-		die('devLog() has no write permissions to the logfile:'.$logfile_FullPath);
+		die('devLog() has no write permissions to the logfile: '.$logfile_FullPath);
 	}
 }
 
