@@ -40,10 +40,12 @@ The location of the `dev.log` file is determined by the content of a special fil
 
 1.  **Environment Variable:** Checks for an environment variable named `DEVLOG_PATH_FILE_LOCATION`. If this variable is set and points to a valid `dev.log.path` file, that file is used. This is the most flexible method for configuration, especially in complex environments or containers.
     Example: `DEVLOG_PATH_FILE_LOCATION=/etc/myapp/dev.log.path`
-2.  **`DIR_ROOT/dev.log.path`:** If the environment variable is not found, `devLog` looks for `dev.log.path` in a directory defined by the `DIR_ROOT` constant.
+2.  **User-Specific Directory:** If the environment variable is not found, `devLog` checks for `dev.log.path` in a user-specific configuration directory: `$_SERVER['HOME']/.config/devlog/dev.log.path`. This allows users to have a global `devLog` configuration.
+    Example: `/home/user/.config/devlog/dev.log.path`
+3.  **`DIR_ROOT/dev.log.path`:** If the above methods don't find the file, `devLog` looks for `dev.log.path` in a directory defined by the `DIR_ROOT` constant.
     *   `DIR_ROOT` is a constant that you can define in your application's bootstrap (e.g., your project's root directory).
     *   If `DIR_ROOT` is not defined by your application, it defaults to the directory where `dev.log.inc.php` itself resides.
-3.  **`<devlog_script_dir>/dev.log.path`:** If `DIR_ROOT` is not defined (or if `dev.log.path` is not found there), `devLog` looks for `dev.log.path` in the same directory where `dev.log.inc.php` is located (i.e., `__DIR__ . '/dev.log.path'`).
+4.  **`<devlog_script_dir>/dev.log.path`:** Finally, if `dev.log.path` is still not found, `devLog` looks for it in the same directory where `dev.log.inc.php` is located (i.e., `__DIR__ . '/dev.log.path'`).
 
 **Example `dev.log.path` content:**
 `/var/logs/my_application_logs/`

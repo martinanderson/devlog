@@ -72,7 +72,15 @@ function devLog(string $message = 'beep', $dataToLog = '', int $filter = 0): voi
         $pathToDevLogPathFile = $envPath;
     }
 
-    // 2. Primary Fallback Location: DIR_ROOT
+    // 2. User-specific config location (new)
+    if ($pathToDevLogPathFile === null && isset($_SERVER['HOME'])) {
+        $homeConfigPath = $_SERVER['HOME'] . '/.config/devlog/' . $logPathFileName;
+        if (file_exists($homeConfigPath)) {
+            $pathToDevLogPathFile = $homeConfigPath;
+        }
+    }
+
+    // 3. Primary Fallback Location: DIR_ROOT
     if ($pathToDevLogPathFile === null) {
         $potentialPath = DIR_ROOT . '/' . $logPathFileName;
         if (file_exists($potentialPath)) {
@@ -80,7 +88,7 @@ function devLog(string $message = 'beep', $dataToLog = '', int $filter = 0): voi
         }
     }
 
-    // 3. Secondary Fallback Location: __DIR__ (directory of this dev.log.inc.php file)
+    // 4. Secondary Fallback Location: __DIR__ (directory of this dev.log.inc.php file)
     if ($pathToDevLogPathFile === null) {
         $potentialPath = __DIR__ . '/' . $logPathFileName;
         if (file_exists($potentialPath)) {
@@ -104,9 +112,10 @@ function devLog(string $message = 'beep', $dataToLog = '', int $filter = 0): voi
             trigger_error('Could not read dev.log.path file: ' . $pathToDevLogPathFile, E_USER_WARNING);
         }
     } else {
-        // 4. Clear Warning if dev.log.path is not found
+    // 5. Clear Warning if dev.log.path is not found
         trigger_error(
             'dev.log.path file not found. Looked in DEVLOG_PATH_FILE_LOCATION environment variable, ' .
+        (isset($_SERVER['HOME']) ? $_SERVER['HOME'] . '/.config/devlog/' . $logPathFileName . ', ' : '') .
             DIR_ROOT . '/' . $logPathFileName . ', and ' .
             __DIR__ . '/' . $logPathFileName,
             E_USER_WARNING
@@ -203,11 +212,13 @@ function devLog(string $message = 'beep', $dataToLog = '', int $filter = 0): voi
                     foreach ($keywords as $keyword) {
                         // \b for word boundary, (?<!['"]) for not preceded by ' or "
                         // This is a simplified approach and might not cover all edge cases for SQL comments or complex strings.
-                        $sql = preg_replace('/\b(' . preg_quote($keyword, '/') . ')\b(?![^"]*"(?:[^"]*"[^"]*")*[^"]*$)(?![^\']*\'(?:[^\']*\'[^\']*\')*[^\']*$)/', "\n$1", $sql);
+                        // Added 'u' flag for Unicode support.
+                        $sql = preg_replace('/\b(' . preg_quote($keyword, '/') . ')\b(?![^"]*"(?:[^"]*"[^"]*")*[^"]*$)(?![^\']*\'(?:[^\']*\'[^\']*\')*[^\']*$)/u', "\n$1", $sql);
                     }
                     // Specific handling for clauses that often start on a new line and are indented.
-                    $sql = preg_replace('/(FROM|WHERE|SET|VALUES|ORDER BY|GROUP BY|HAVING|LEFT JOIN|RIGHT JOIN|INNER JOIN|JOIN)\s/', "\n    $1 ", $sql);
-                    $sql = preg_replace('/(AND|OR)\s/', "\n        $1 ", $sql);
+                    // Added 'u' flag for Unicode support.
+                    $sql = preg_replace('/(FROM|WHERE|SET|VALUES|ORDER BY|GROUP BY|HAVING|LEFT JOIN|RIGHT JOIN|INNER JOIN|JOIN)\s/u', "\n    $1 ", $sql);
+                    $sql = preg_replace('/(AND|OR)\s/u', "\n        $1 ", $sql);
 
 
                     $formattedData = trim($sql); // Trim initial newline if any
